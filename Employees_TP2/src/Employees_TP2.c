@@ -20,9 +20,25 @@ int main(void) {
 	setbuf(stdout,NULL);
 
 	eEmployee arrayEmployees[QTY_EMPLOYEES];
+	int opcion;
+
+	do
+			{
+				if(!utn_getNumberInt(	&opcion,
+									"\n1.Dar de alta un Cliente"
+									"\n2.Modificar un Clientes"
+									"\n3.Dar de baja un Cliente"
+									"\n4.Informe"
+									"\n5.Salir",
+									"\nError opcion invalida",1,5,2) )
+				{
+					switch(opcion)
+					{
 
 
-
+					}
+					}
+			}while(opcion != 5);
 
 	return EXIT_SUCCESS;
 }
