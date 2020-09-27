@@ -25,5 +25,7 @@ typedef struct
 int initEmployees(eEmployee list[], int len);
 int addEmployees(eEmployee* array,int len, int indice, int* id);
 int emp_getEmptyIndex(eEmployee list[], int len);
+int emp_printEmployees(eEmployee list[], int len);
+int emp_contadorEmployee(eEmployee list[], int len);
 
 #endif /* ARRAYEMPLOYEES_H_ */

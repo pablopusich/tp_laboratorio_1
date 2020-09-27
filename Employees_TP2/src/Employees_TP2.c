@@ -56,12 +56,23 @@ int main(void) {
 						        		printf("No hay mas lugares libres.\n");
 						        	   }
 						        	}
-						        }
+
+					break;
+					case 2:
+
+						if(emp_contadorEmployee(arrayEmployees,QTY_EMPLOYEES)>0)
+						{
+							emp_printEmployees(arrayEmployees,QTY_EMPLOYEES);
+							  }
+							   else{
+							        printf("NO HAY EMPLEADOS CARGADOS!!!\n");
+							  }
+						break;
+				}
+				}
 
 
-					}
-
-			}while(opcion != 5);
+				}while(opcion != 5);
 
 	return EXIT_SUCCESS;
 }
