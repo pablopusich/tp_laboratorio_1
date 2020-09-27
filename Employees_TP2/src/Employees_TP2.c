@@ -10,8 +10,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "utn.h"
+#include "ArrayEmployees.h"
+#define QTY_EMPLOYEES 1000
+
 
 int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
+	setbuf(stdout,NULL);
+
+	eEmployee arrayEmployees[QTY_EMPLOYEES];
+
+
+
+
 	return EXIT_SUCCESS;
 }
