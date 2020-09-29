@@ -141,4 +141,113 @@ int emp_contadorEmployee(eEmployee list[], int len)
 	return contadorEmpleados;
 }
 
+/** \brief find an Employee by Id en returns the index position in array.
+*
+* \param list Employee*
+* \param len int
+* \param id int
+* \return Return employee index position or (-1) if [Invalid length or NULL
+pointer received or employee not found]
+*
+*/
+int emp_findEmployeeById(eEmployee list[], int len,int id)
+{
+	int retorno = -1;
+	int i;
+		if(list != NULL && len > 0 && id > -1)
+		{
+			for(i=0;i<len;i++)
+			{
+				if( list[i].id == id &&
+					list[i].isEmpty == 0)
+				{
+					retorno = i;
+					break;
+				}
+			}
+		}
+		return retorno;
+}
+/**
+ * \brief Modifica los datos ingresados de un empleado por ID.
+ * \param list Puntero al array de empleados.
+ * \param len Es la longitud del array.
+ * \param id Identificacion del cliente a modificar.
+ * \param option para verificar que campo desea modificar.
+ * \return Retorna 0 si modifico los datos del cliente correctamente y -1 si tuvo algún error.
+ *
+ */
+int emp_modifEmployee(eEmployee list[], int len, int id, int option)
+{
+	int retorno = -1;
+	int i;
+	eEmployee auxiliarEmpleado;
+	if(list != NULL && len > 0 && id >= 0 && option > 0 && option < 5)
+	{
+		for(i=0;i<len;i++)
+		{
+			if( list[i].id == id &&
+				list[i].isEmpty == 0)
+			{
+				if( option == 1 &&
+					!utn_getNameOrSurname(auxiliarEmpleado.name,QTY_NAME,"Ingrese un nombre: \n","Nombre invalido.\n",2))
+				{
+					retorno = 0;
+					strncpy(list[i].name,auxiliarEmpleado.name,QTY_NAME);
+					break;
+				}
+				else if( option == 2 &&
+						 !utn_getNameOrSurname(auxiliarEmpleado.lastName,QTY_SURNAME,"Ingrese un apellido: \n","Apellido invalido.\n",2))
+				{
+					retorno = 0;
+					strncpy(list[i].lastName,auxiliarEmpleado.lastName,QTY_SURNAME);
+					break;
+				}
+				else if( option == 3 &&
+						!utn_getNumberFloat(&auxiliarEmpleado.salary,"Ingrese un salario Limite de 500.000: \n","Salario invalido.\n",0,500000,2))
+				{
+					retorno = 0;
+					list[i].salary = auxiliarEmpleado.salary;
+					break;
+				}
+				else if(option == 4 &&
+						!utn_getNumberInt(&auxiliarEmpleado.sector,"Ingrese un sector (1 a 5): \n","Sector invalido.\n",1,5,2))
+				{
+					retorno = 0;
+					list[i].sector = auxiliarEmpleado.sector;
+					break;
+				}
+			}
+		}
+	}
+	return retorno;
+}
 
+/** \brief Remove a Employee by Id (put isEmpty Flag in 1)
+*
+* \param list Employee*
+* \param len int
+* \param id int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
+find a employee] - (0) if Ok
+*
+*/
+int emp_removeEmployee(eEmployee list[], int len, int id)
+{
+	int retorno = -1;
+	int i;
+	if(list != NULL && len > 0 && id >= 0)
+	{
+		for(i=0;i<len;i++)
+		{
+			if( list[i].id == id &&
+				list[i].isEmpty == 0)
+			{
+				retorno = 0;
+				list[i].isEmpty = 1;
+				break;
+			}
+		}
+	}
+	return retorno;
+}

@@ -24,8 +24,10 @@ int main(void) {
 
 	eEmployee arrayEmployees[QTY_EMPLOYEES];
 	int opcion;
-	int id;
+	int id = 0;
 	int auxIndice;
+	int auxId;
+	int auxModificacion;
 
 	 if(initEmployees(arrayEmployees,QTY_EMPLOYEES)==0){
 		 printf("Array inicializado Correctamente.\n");
@@ -60,16 +62,41 @@ int main(void) {
 					break;
 					case 2:
 
-						if(emp_contadorEmployee(arrayEmployees,QTY_EMPLOYEES)>0)
-						{
-							emp_printEmployees(arrayEmployees,QTY_EMPLOYEES);
-							  }
-							   else{
-							        printf("NO HAY EMPLEADOS CARGADOS!!!\n");
-							  }
-						break;
+					if(emp_contadorEmployee(arrayEmployees,QTY_EMPLOYEES) > 0 &&
+						        	  !emp_printEmployees(arrayEmployees,QTY_EMPLOYEES) &&
+						        	  !utn_getNumberInt(&auxId,"Por favor, ingrese el ID del cliente:\n","ID invalido\n",0,id,2) &&
+						        	  emp_findEmployeeById(arrayEmployees,QTY_EMPLOYEES,auxId) > -1 &&
+						        	  !utn_getNumberInt(&auxModificacion,"Por favor, ingrese el campo que desea modificar: \n"
+						        													"1.-Nombre.\n"
+						        													"2.-Apellido.\n"
+						        													"3.-Salario.\n"
+						        													"4.-Sector.\n","Opcion invalida.\n",1,4,2) &&
+						        	!emp_modifEmployee(arrayEmployees,QTY_EMPLOYEES,auxId,auxModificacion))
+						        	{
+						        		printf("Modificacion exitosa.\n");
+						        	}
+						        	else
+						        	{
+						        	  printf("NO HAY EMPLEADOS CARGADOS!!!\n");
+						        	}
+					break;
+					case 3:
+									if(	emp_contadorEmployee(arrayEmployees,QTY_EMPLOYEES) > 0 &&
+										!emp_printEmployees(arrayEmployees,QTY_EMPLOYEES) &&
+										!utn_getNumberInt(&auxId,"Ingrese el ID del cliente a dar de baja:\n","ID invalido\n",0,id,2) &&
+										emp_findEmployeeById(arrayEmployees,QTY_EMPLOYEES,auxId) > -1 &&
+										!emp_removeEmployee(arrayEmployees,QTY_EMPLOYEES,auxId))
+									{
+										printf("Baja de exitosa.\n");
+									}
+									else
+									{
+										printf("NO HAY EMPLEADOS CARGADOS!!!\n");
+									}
+									break;
+						        	}
 				}
-				}
+
 
 
 				}while(opcion != 5);
