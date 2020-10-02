@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : Employees_TP2.c
- Author      : 
+ Author      : Pablo Pusich
  Version     :
  Copyright   : Your copyright notice
  Description : Hello World in C, Ansi-style
@@ -28,9 +28,10 @@ int main(void) {
 	int auxIndice;
 	int auxId;
 	int auxModificacion;
+	int auxiliarInformes;
 
 	 if(initEmployees(arrayEmployees,QTY_EMPLOYEES)==0){
-		 printf("Array inicializado Correctamente.\n");
+		 printf("Array inicializado\n");
 	 }
 
 	do
@@ -46,60 +47,83 @@ int main(void) {
 					switch(opcion)
 					{
 					case 1:
-						        	auxIndice= emp_getEmptyIndex(arrayEmployees,QTY_EMPLOYEES);
+						        	auxIndice= emplo_getEmptyIndex(arrayEmployees,QTY_EMPLOYEES);
 						        	if(auxIndice >= 0)
 						        		{
 						        		if(addEmployees(arrayEmployees,QTY_EMPLOYEES,auxIndice,&id)==0)
 						        		{
-						        		printf("Carga realizada con exito.\n");
+						        		printf("registro efectuado con exito.\n");
 						        		}
 						        		else
 						        		{
-						        		printf("No hay mas lugares libres.\n");
+						        		printf("No hay lugares disponibles.\n");
 						        	   }
 						        	}
 
 					break;
 					case 2:
 
-					if(emp_contadorEmployee(arrayEmployees,QTY_EMPLOYEES) > 0 &&
-						        	  !emp_printEmployees(arrayEmployees,QTY_EMPLOYEES) &&
-						        	  !utn_getNumberInt(&auxId,"Por favor, ingrese el ID del cliente:\n","ID invalido\n",0,id,2) &&
-						        	  emp_findEmployeeById(arrayEmployees,QTY_EMPLOYEES,auxId) > -1 &&
-						        	  !utn_getNumberInt(&auxModificacion,"Por favor, ingrese el campo que desea modificar: \n"
+					if(emplo_contadorEmployee(arrayEmployees,QTY_EMPLOYEES) > 0 &&
+						        	  !emplo_printEmployees(arrayEmployees,QTY_EMPLOYEES) &&
+						        	  !utn_getNumberInt(&auxId,"ingrese el ID del cliente:\n","ID incorrecto\n",0,id,2) &&
+						        	  emplo_findEmployeeById(arrayEmployees,QTY_EMPLOYEES,auxId) > -1 &&
+						        	  !utn_getNumberInt(&auxModificacion,"ingrese el campo que desea cambiar: \n"
 						        													"1.-Nombre.\n"
 						        													"2.-Apellido.\n"
 						        													"3.-Salario.\n"
-						        													"4.-Sector.\n","Opcion invalida.\n",1,4,2) &&
-						        	!emp_modifEmployee(arrayEmployees,QTY_EMPLOYEES,auxId,auxModificacion))
+						        													"4.-Sector.\n","Opcion incorrecta\n",1,4,2) &&
+						        	!emplo_modifEmployee(arrayEmployees,QTY_EMPLOYEES,auxId,auxModificacion))
 						        	{
 						        		printf("Modificacion exitosa.\n");
 						        	}
 						        	else
 						        	{
-						        	  printf("NO HAY EMPLEADOS CARGADOS!!!\n");
+						        	  printf("no hay empleados registrados\n");
 						        	}
 					break;
 					case 3:
-									if(	emp_contadorEmployee(arrayEmployees,QTY_EMPLOYEES) > 0 &&
-										!emp_printEmployees(arrayEmployees,QTY_EMPLOYEES) &&
-										!utn_getNumberInt(&auxId,"Ingrese el ID del cliente a dar de baja:\n","ID invalido\n",0,id,2) &&
-										emp_findEmployeeById(arrayEmployees,QTY_EMPLOYEES,auxId) > -1 &&
-										!emp_removeEmployee(arrayEmployees,QTY_EMPLOYEES,auxId))
+									if(	emplo_contadorEmployee(arrayEmployees,QTY_EMPLOYEES) > 0 &&
+										!emplo_printEmployees(arrayEmployees,QTY_EMPLOYEES) &&
+										!utn_getNumberInt(&auxId,"Ingrese ID del cliente a dar de baja:\n","ID invalido\n",0,id,2) &&
+										emplo_findEmployeeById(arrayEmployees,QTY_EMPLOYEES,auxId) > -1 &&
+										!emplo_removeEmployee(arrayEmployees,QTY_EMPLOYEES,auxId))
 									{
 										printf("Baja de exitosa.\n");
 									}
 									else
 									{
-										printf("NO HAY EMPLEADOS CARGADOS!!!\n");
+										printf("no hay empleados registrados\n");
 									}
-									break;
-						        	}
-				}
 
+					break;
+					case 4:
+									if(emplo_contadorEmployee(arrayEmployees,QTY_EMPLOYEES) > 0 &&
+							        	  !utn_getNumberInt(&auxiliarInformes,"Informes: \n"
+							        				        							  "1.Lista de empleados ordenados alfabéticamente por Apellido y Sector.\n"
+							        				        							  "2.Lista de salarios o.\n","Opcion Incorrecta",1,2,2))
+							        	{
 
+									if(auxiliarInformes == 1)
+							        	{
+							        		emplo_sortEmployees(arrayEmployees,QTY_EMPLOYEES);
+							        		emplo_printEmployees(arrayEmployees,QTY_EMPLOYEES);
+							        	}
+							        	else {
+							        		if(auxiliarInformes == 2)
+							        		{
+							        			emplo_totalSalariosYCantidadQueLoSupera(arrayEmployees,QTY_EMPLOYEES);
+							        		}
+							        	}
+							        	}
+							        	else{
+							        		printf("No hay empleados registrados \n");
+							        	}
+					break;
+									}
 
-				}while(opcion != 5);
+								}
+
+					}while(opcion != 5);
 
 	return EXIT_SUCCESS;
 }

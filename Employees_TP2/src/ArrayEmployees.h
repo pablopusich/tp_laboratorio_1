@@ -2,7 +2,7 @@
  * ArrayEmployees.h
  *
  *  Created on: 27 sept. 2020
- *      Author: Usuario
+ *      Author: Pablo Pusich
  */
 
 #ifndef ARRAYEMPLOYEES_H_
@@ -24,12 +24,14 @@ typedef struct
 
 int initEmployees(eEmployee list[], int len);
 int addEmployees(eEmployee* array,int len, int indice, int* id);
-int emp_getEmptyIndex(eEmployee list[], int len);
-int emp_printEmployees(eEmployee list[], int len);
-int emp_contadorEmployee(eEmployee list[], int len);
-int emp_findEmployeeById(eEmployee list[], int len,int id);
-int emp_modifEmployee(eEmployee list[], int len, int id, int option);
-int emp_removeEmployee(eEmployee list[], int len, int id);
+int emplo_getEmptyIndex(eEmployee list[], int len);
+int emplo_printEmployees(eEmployee list[], int len);
+int emplo_contadorEmployee(eEmployee list[], int len);
+int emplo_findEmployeeById(eEmployee list[], int len,int id);
+int emplo_modifEmployee(eEmployee list[], int len, int id, int option);
+int emplo_removeEmployee(eEmployee list[], int len, int id);
+void emplo_sortEmployees(eEmployee list[], int len);
+int emplo_totalSalariosYCantidadQueLoSupera(eEmployee list[], int len);
 
 
 #endif /* ARRAYEMPLOYEES_H_ */

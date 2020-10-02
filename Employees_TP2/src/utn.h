@@ -2,7 +2,7 @@
  * utn.h
  *
  *  Created on: 27 sept. 2020
- *      Author: Usuario
+ *      Author: Pablo Pusich
  */
 
 #ifndef UTN_H_

@@ -2,7 +2,7 @@
  * utn.c
  *
  *  Created on: 27 sept. 2020
- *      Author: Usuario
+ *      Author: Pablo Pusich
  */
 
 #include <stdio.h>
